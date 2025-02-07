@@ -1,6 +1,8 @@
+const gameBtns = document.getElementById("game-btns");
 const rockBtn = document.getElementById("rock-btn");
 const paperBtn = document.getElementById("paper-btn");
 const scissorsBtn = document.getElementById("scissors-btn");
+const resetBtn = document.getElementById("reset-btn");
 const humanScoreEl = document.getElementById("human-score");
 const computerScoreEl = document.getElementById("computer-score");
 const messageEl = document.getElementById("message");
@@ -29,6 +31,15 @@ scissorsBtn.addEventListener("click", function () {
   const computerChoice = getComputerChoice();
   message = playRound(humanChoice, computerChoice);
   checkForWinner();
+  render();
+});
+
+resetBtn.addEventListener("click", function () {
+  humanScore = 0;
+  computerScore = 0;
+  message = "Press a button to start the game";
+  gameBtns.style.display = "block";
+  resetBtn.style.display = "none";
   render();
 });
 
@@ -76,10 +87,14 @@ function render() {
 function checkForWinner() {
   if (humanScore === 5) {
     message = "You win the game!";
+    gameBtns.style.display = "none";
+    resetBtn.style.display = "inline-block";
   }
 
   if (computerScore === 5) {
     message = "You lose the game!";
+    resetBtn.style.display = "inline-block";
+    gameBtns.style.display = "none";
   }
 }
 
